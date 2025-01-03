@@ -1,8 +1,8 @@
 {
-  "petrolstock": 100,
-  "petroldensity": 0.8,
-  "petrolrate": 102.5,
-  "dieselstock": 100,
-  "dieseldensity": 0.85,
-  "dieselrate": 90.5
+    "petrolstock": 60.0,
+    "petroldensity": 0.8,
+    "petrolrate": 105.0,
+    "dieselstock": 50.0,
+    "dieseldensity": 0.8,
+    "dieselrate": 90.0
 }

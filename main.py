@@ -5,7 +5,6 @@ import json
 import uvicorn
 
 app = FastAPI()
-
 # CORS configuration
 app.add_middleware(
     CORSMiddleware,
@@ -15,7 +14,6 @@ app.add_middleware(
     allow_headers=["*"],
     expose_headers=["*"]
 )
-
 # Define the data model
 class FuelData(BaseModel):
     petrolstock: float
@@ -28,7 +26,7 @@ class FuelData(BaseModel):
 # File to store JSON data
 DATA_FILE = "fuel_data.json"
 
-# Load initial data from the JSON file or set defaults
+# Load data from the JSON file
 def load_data():
     try:
         with open(DATA_FILE, "r") as file:
@@ -43,31 +41,20 @@ def load_data():
             "dieseldensity": 0.85,
             "dieselrate": 90.5,
         }
+# Get fuel data
+@app.get("/fuel-data", response_model=FuelData)
+async def get_fuel_data():
+    fuel_data = load_data()
+    return fuel_data
 
 # Save data to the JSON file
 def save_data(data):
     with open(DATA_FILE, "w") as file:
         json.dump(data, file, indent=4)
-
-# Initialize the data
-fuel_data = load_data()
-
-@app.get("/fuel-data", response_model=FuelData)
-async def get_fuel_data():
-    """
-    Endpoint to fetch the current fuel data.
-    """
-    return fuel_data
-
-@app.post("/fuel-data", response_model=FuelData)
+@app.put("/update-fuel-data", response_model=FuelData)
 async def update_fuel_data(new_data: FuelData):
-    """
-    Endpoint to update the fuel data.
-    """
-    global fuel_data
-    fuel_data.update(new_data.dict())
-    save_data(fuel_data)  # Persist updated data to file
-    return fuel_data
-
+    data = new_data.dict()
+    save_data(data)  # Save the updated data to the JSON file
+    return data
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8080, log_level="info")
