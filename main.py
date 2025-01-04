@@ -22,6 +22,13 @@ class FuelData(BaseModel):
     dieselstock: float
     dieseldensity: float
     dieselrate: float
+    manager:str
+    operator:str
+    managerconatct:str
+    operatorcontact:str
+    pesono:str
+    gstno:str
+    gstvalidity:str
 
 # File to store JSON data
 DATA_FILE = "fuel_data.json"
