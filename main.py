@@ -22,13 +22,14 @@ class FuelData(BaseModel):
     dieselstock: float
     dieseldensity: float
     dieselrate: float
-    manager:str
-    operator:str
-    managerconatct:str
-    operatorcontact:str
-    pesono:str
-    gstno:str
-    gstvalidity:str
+    # manager:str
+    # operator:str
+    # managerconatct:str
+    # operatorcontact:str
+    # pesono:str
+    # gstnoreliancebp:str
+    # gstvalidity:str
+    # gstnorbml:str
 
 # File to store JSON data
 DATA_FILE = "fuel_data.json"
@@ -47,6 +48,20 @@ def load_data():
             "dieselstock": 100,
             "dieseldensity": 0.85,
             "dieselrate": 90.5,
+            "petrolstock": 14.0,
+            "petroldensity": 700.0,
+            "petrolrate": 107.0,
+            "dieselstock": 15.0,
+            "dieseldensity": 700.0,
+            "dieselrate": 97.0,
+            # "manager": "Ms. Kavita Yadav",
+            # "operator": " Mr. Ilyas Mulla",
+            # "managerconatct": "9372419087",
+            # "operatorcontact": "8369909191",
+            # "pesono": "P/WC/MH/14/5268(P161970)",
+            # "gstnoreliancebp": "27AAHCR2546N2ZV",
+            # "gstnorbml":"27AAKCR8762R127",
+            # "gstvalidity": "31.12.2031"
         }
 # Get fuel data
 @app.get("/fuel-data", response_model=FuelData)
