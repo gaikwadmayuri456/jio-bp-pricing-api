@@ -1,5 +1,5 @@
 {
-    "petrolstock": 14.0,
+    "petrolstock": 40.0,
     "petroldensity": 700.0,
     "petrolrate": 107.0,
     "dieselstock": 15.0,
@@ -10,6 +10,7 @@
     "managerconatct": "9372419087",
     "operatorcontact": "8369909191",
     "pesono": "P/WC/MH/14/5268(P161970)",
-    "gstno": "27AAKCR8762R127",
-    "gstvalidity": "31.12.2031"
+    "gstnoreliancebp": "27AAHCR2546N2ZV",
+    "gstvalidity": "31.12.2031",
+    "gstnorbml": "27AAKCR8762R127"
 }
