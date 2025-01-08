@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import json
 import uvicorn
+from datetime import datetime
 
 app = FastAPI()
 # CORS configuration
@@ -22,14 +23,15 @@ class FuelData(BaseModel):
     dieselstock: float
     dieseldensity: float
     dieselrate: float
-    # manager:str
-    # operator:str
-    # managerconatct:str
-    # operatorcontact:str
-    # pesono:str
-    # gstnoreliancebp:str
-    # gstvalidity:str
-    # gstnorbml:str
+    manager:str
+    operator:str
+    managerconatct:str
+    operatorcontact:str
+    pesono:str
+    gstnoreliancebp:str
+    gstvalidity:str
+    gstnorbml:str
+    updated_date:str
 
 # File to store JSON data
 DATA_FILE = "fuel_data.json"
@@ -54,6 +56,7 @@ def load_data():
             "dieselstock": 15.0,
             "dieseldensity": 700.0,
             "dieselrate": 97.0,
+            "updated_date": datetime.now().strftime("%Y-%m-%d")
             # "manager": "Ms. Kavita Yadav",
             # "operator": " Mr. Ilyas Mulla",
             # "managerconatct": "9372419087",
@@ -76,6 +79,7 @@ def save_data(data):
 @app.put("/update-fuel-data", response_model=FuelData)
 async def update_fuel_data(new_data: FuelData):
     data = new_data.dict()
+    data["updated_date"] = datetime.now().isoformat()
     save_data(data)  # Save the updated data to the JSON file
     return data
 if __name__ == "__main__":
